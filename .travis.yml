@@ -1,0 +1,13 @@
+services:
+ - docker
+
+language: generic
+
+
+script:
+ - docker build  -t mochiya98/ubuntu-cpp-build:latest .
+
+after_success:
+ - docker history mochiya98/ubuntu-cpp-build:latest
+ - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+ - docker push mochiya98/ubuntu-cpp-build:latest
